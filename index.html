@@ -7,14 +7,12 @@
     <!-- Fonte personalizada -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos gerais do corpo */
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: #f9f9f9;
             color: #333;
         }
-        /* Estilo do cabeçalho com imagem de fundo */
         header {
             background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');
             background-size: cover;
@@ -22,6 +20,15 @@
             padding: 60px 20px;
             text-align: center;
             color: white;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInSlideDown 1s ease forwards;
+        }
+        @keyframes fadeInSlideDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         header h1 {
             font-size: 3em;
@@ -30,7 +37,6 @@
         header p {
             font-size: 1.2em;
         }
-        /* Navegação */
         nav {
             background-color: #003366;
             display: flex;
@@ -46,7 +52,6 @@
         nav a:hover {
             text-decoration: underline;
         }
-        /* Seções do site */
         section {
             max-width: 1000px;
             margin: 40px auto;
@@ -54,11 +59,17 @@
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         section h2 {
             color: #003366;
         }
-        /* Rodapé */
         footer {
             background-color: #003366;
             color: white;
@@ -66,14 +77,12 @@
             padding: 20px 0;
             font-size: 0.9em;
         }
-        /* Lista de serviços */
         ul {
             padding-left: 20px;
         }
         ul li {
             margin-bottom: 10px;
         }
-        /* Responsividade */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
@@ -83,8 +92,6 @@
                 padding: 20px;
             }
         }
-
-        /* Botão flutuante do WhatsApp */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -105,30 +112,44 @@
             width: 30px;
             height: 30px;
         }
+        /* Botão Voltar ao Topo */
+        #btn-topo {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            font-size: 1.5em;
+        }
     </style>
 </head>
 <body>
 
-<!-- Cabeçalho com nome da empresa e slogan -->
 <header>
     <h1>CVRG Participações e Negócios Imobiliários LTDA</h1>
     <p>Excelência em gestão imobiliária, participações empresariais e consultoria estratégica</p>
 </header>
 
-<!-- Navegação principal -->
 <nav>
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
     <a href="#contato">Contato</a>
 </nav>
 
-<!-- Seção sobre a empresa -->
 <section id="sobre">
     <h2>Sobre Nós</h2>
     <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial. Fundada em 2019, a empresa atua com foco em aluguel de propriedades, administração de condomínios, desenvolvimento de negócios e participações societárias. Nossa missão é maximizar o valor patrimonial de nossos clientes por meio de soluções ágeis, inteligentes e seguras.</p>
 </section>
 
-<!-- Seção de serviços -->
 <section id="servicos">
     <h2>Serviços</h2>
     <ul>
@@ -139,7 +160,6 @@
     </ul>
 </section>
 
-<!-- Seção de contato -->
 <section id="contato">
     <h2>Contato</h2>
     <p><strong>Endereço:</strong> Em breve</p>
@@ -147,25 +167,50 @@
     <p><strong>E-mail:</strong> contato@cvrg.com.br</p>
 </section>
 
-<!-- Rodapé -->
 <footer>
     <p>&copy; 2025 CVRG Participações e Negócios Imobiliários LTDA. Todos os direitos reservados.</p>
 </footer>
 
 <!-- Botão flutuante do WhatsApp -->
-<a href="https://wa.me/5511985965908" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+<a href="https://wa.me/5511985965908?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20CVRG." target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 </a>
 
-<!-- Script JavaScript comentado -->
+<!-- Botão Voltar ao Topo -->
+<button id="btn-topo" title="Voltar ao topo">&#8679;</button>
+
+<!-- JavaScript para interações -->
 <script>
-    // Quando o usuário clicar em um link da navegação, a página rola suavemente até a seção correspondente
+    // Rolagem suave ao clicar no menu
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault(); // Evita o comportamento padrão do link
+            e.preventDefault();
             const section = document.querySelector(this.getAttribute('href'));
-            section.scrollIntoView({ behavior: 'smooth' }); // Rolagem suave até a seção
+            section.scrollIntoView({ behavior: 'smooth' });
         });
+    });
+
+    // Mostrar botão "voltar ao topo" ao rolar
+    const btnTopo = document.getElementById('btn-topo');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            btnTopo.style.display = 'flex';
+        } else {
+            btnTopo.style.display = 'none';
+        }
+
+        // Mostrar seções ao entrar na tela
+        document.querySelectorAll('section').forEach(sec => {
+            const top = sec.getBoundingClientRect().top;
+            if (top < window.innerHeight - 100) {
+                sec.classList.add('visible');
+            }
+        });
+    });
+
+    // Ação do botão "voltar ao topo"
+    btnTopo.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 </script>
 
