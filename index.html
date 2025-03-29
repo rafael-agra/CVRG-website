@@ -1,218 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CVRG Participações e Negócios Imobiliários LTDA</title>
-    <!-- Fonte personalizada -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');
-            background-size: cover;
-            background-position: center;
-            padding: 60px 20px;
-            text-align: center;
-            color: white;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInSlideDown 1s ease forwards;
-        }
-        @keyframes fadeInSlideDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.2em;
-        }
-        nav {
-            background-color: #003366;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-            font-weight: 600;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        section h2 {
-            color: #003366;
-        }
-        footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 0.9em;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        ul li {
-            margin-bottom: 10px;
-        }
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            section {
-                margin: 20px;
-                padding: 20px;
-            }
-        }
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            z-index: 1000;
-        }
-        .whatsapp-float img {
-            width: 30px;
-            height: 30px;
-        }
-        /* Botão Voltar ao Topo */
-        #btn-topo {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            background-color: #003366;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 999;
-            font-size: 1.5em;
-        }
-    </style>
-</head>
-<body>
 
-<header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVRG Participações e Negócios Imobiliários LTDA</title>
+
+  <!-- Fonte personalizada -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Chama o arquivo styles.css-->  
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  <!-- Botão para alternar o modo escuro -- em implentação
+  <button id="toggle-dark">Modo Escuro</button>
+  -->
+  <!-- Cabeçalho -->
+  <header>
     <h1>CVRG Participações e Negócios Imobiliários LTDA</h1>
     <p>Excelência em gestão imobiliária, participações empresariais e consultoria estratégica</p>
-</header>
+  </header>
 
-<nav>
+  <!-- Navegação -->
+  <nav>
     <a href="#sobre">Sobre</a>
     <a href="#servicos">Serviços</a>
     <a href="#contato">Contato</a>
-</nav>
+  </nav>
 
-<section id="sobre">
+  <!-- Seções do conteúdo -->
+  <section id="sobre">
     <h2>Sobre Nós</h2>
-    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial. Fundada em 2019, a empresa atua com foco em aluguel de propriedades, administração de condomínios, desenvolvimento de negócios e participações societárias. Nossa missão é maximizar o valor patrimonial de nossos clientes por meio de soluções ágeis, inteligentes e seguras.</p>
-</section>
+    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial...</p>
+  </section>
 
-<section id="servicos">
+  <section id="servicos">
     <h2>Serviços</h2>
     <ul>
-        <li><strong>Aluguel de Imóveis:</strong> Residenciais, comerciais, apart-hotéis e vagas de garagem.</li>
-        <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e centros comerciais.</li>
-        <li><strong>Consultoria Empresarial:</strong> Planejamento, reestruturação e gestão organizacional.</li>
-        <li><strong>Participações Societárias:</strong> Investimentos em empresas com potencial de crescimento.</li>
+      <li><strong>Aluguel de Imóveis:</strong> Residenciais, comerciais e vagas de garagem.</li>
+      <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e centros comerciais.</li>
+      <li><strong>Consultoria Empresarial:</strong> Planejamento, reestruturação e gestão organizacional.</li>
+      <li><strong>Participações Societárias:</strong> Investimentos em empresas com potencial de crescimento.</li>
     </ul>
-</section>
+  </section>
 
-<section id="contato">
+  <section id="contato">
     <h2>Contato</h2>
-    <p><strong>Endereço:</strong> Em breve</p>
+    <p><strong>Endereço:</strong> Rua Lençóis, São Paulo, SP</p>
     <p><strong>Telefone:</strong> Em breve</p>
     <p><strong>E-mail:</strong> contato@cvrg.com.br</p>
-</section>
 
-<footer>
+    <!-- Formulário de contato funcional -->
+    <form action="https://formsubmit.co/contato@cvrg.com.br" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+      <button type="submit">Enviar Mensagem</button>
+    </form>  
+  </section>
+
+    <!-- Mapa OpenStreetMap -->
+    <div id="mapa"></div>
+
+
+  <!-- Rodapé -->
+  <footer>
     <p>&copy; 2025 CVRG Participações e Negócios Imobiliários LTDA. Todos os direitos reservados.</p>
-</footer>
+  </footer>
 
-<!-- Botão flutuante do WhatsApp -->
-<a href="https://wa.me/11956022878?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20CVRG." target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+  <!-- Botões flutuantes -->
+  <a href="https://wa.me/11956022878?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20CVRG." target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-</a>
+  </a>
 
-<!-- Botão Voltar ao Topo -->
-<button id="btn-topo" title="Voltar ao topo">&#8679;</button>
+  <button id="btn-topo" title="Voltar ao topo">&#8679;</button>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
+  <!-- Adiciona o javascript-->
+  <script src="scripts.js"></script>
+  </body>
 
-<!-- JavaScript para interações -->
-<script>
-    // Rolagem suave ao clicar no menu
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const section = document.querySelector(this.getAttribute('href'));
-            section.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // Mostrar botão "voltar ao topo" ao rolar
-    const btnTopo = document.getElementById('btn-topo');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            btnTopo.style.display = 'flex';
-        } else {
-            btnTopo.style.display = 'none';
-        }
-
-        // Mostrar seções ao entrar na tela
-        document.querySelectorAll('section').forEach(sec => {
-            const top = sec.getBoundingClientRect().top;
-            if (top < window.innerHeight - 100) {
-                sec.classList.add('visible');
-            }
-        });
-    });
-
-    // Ação do botão "voltar ao topo"
-    btnTopo.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
-
-</body>
 </html>
