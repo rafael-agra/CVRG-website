@@ -83,6 +83,28 @@
                 padding: 20px;
             }
         }
+
+        /* Botão flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            z-index: 1000;
+        }
+        .whatsapp-float img {
+            width: 30px;
+            height: 30px;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +152,12 @@
     <p>&copy; 2025 CVRG Participações e Negócios Imobiliários LTDA. Todos os direitos reservados.</p>
 </footer>
 
+<!-- Botão flutuante do WhatsApp -->
+<a href="https://wa.me/5511985965908" target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+</a>
+
+<!-- Script JavaScript comentado -->
 <script>
     // Quando o usuário clicar em um link da navegação, a página rola suavemente até a seção correspondente
     document.querySelectorAll('nav a').forEach(anchor => {
