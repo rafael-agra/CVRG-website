@@ -5,9 +5,9 @@ const iconeCVRG = L.icon({
   iconAnchor: [20, 40],           // Ponto de ancoragem
   popupAnchor: [0, -35]           // Onde aparece o popup
 });
-
+ 
 const mapa = L.map('mapa', {
-  center: [-23.505061621515956, -46.65457334259711],
+  center: [-23.504908,-46.655614],
   zoom: 15,
   scrollWheelZoom: false,
   gestureHandling: true
