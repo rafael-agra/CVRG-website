@@ -192,12 +192,28 @@ form button:hover {
 
 #mapa {
     height: 300px;
-    width: 100%;
+    width: 90%;
     max-width: 800px;
-    margin: 40px auto 0;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 40px auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
   }
+  
+
+@media (max-width: 600px) {
+    nav {
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px;
+    }
+  
+    nav a {
+      font-size: 0.95rem;
+      padding: 6px 12px;
+    }
+}
+  
 
 /* DARK MODE 
 body.dark-mode {
@@ -226,14 +242,8 @@ body.dark-mode #btn-topo {
 background-color: #444;
 }
 */
-/* NAV FIXA */
-nav {
-position: sticky;
-top: 0;
-z-index: 999;
-}
 
-/* Botão de dark mode */
+/* Botão de dark mode 
 #toggle-dark {
 position: fixed;
 top: 20px;
@@ -247,6 +257,15 @@ cursor: pointer;
 z-index: 1001;
 font-weight: bold;
 }
+  Dark mode para navbar 
+ body.dark-mode nav {
+    background-color: #111;
+  }
+
+  body.dark-mode nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+*/
 /* Ajusta a visibilidade inicial das seções visíveis na tela ao carregar */
 section.pre-visible {
     opacity: 1 !important;
