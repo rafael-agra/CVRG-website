@@ -15,22 +15,17 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <!-- Chama o arquivo styles.css-->  
   <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
-  <!-- Botão para alternar o modo escuro -- em implentação
-  <button id="toggle-dark">Modo Escuro</button>
-  -->
   <!-- Cabeçalho -->
   <header>
     <h1>CVRG Participações e Negócios Imobiliários LTDA</h1>
     <p>Excelência em gestão imobiliária, participações empresariais e consultoria estratégica</p>
   </header>
 
-  <!-- Navegação -->
+  <!-- Navegação responsiva -->
   <nav class="navbar">
-    <a href="#" class="navbar-logo">CVRG</a>
     <div class="navbar-toggle" onclick="document.querySelector('.navbar-menu').classList.toggle('active')">
       <span></span>
       <span></span>
@@ -43,93 +38,71 @@
     </div>
   </nav>
 
-  <!-- Seções do conteúdo -->
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial...</p>
-  </section>
+  <!-- Seções do site aqui (sobre, serviços, contato...) -->
+  <!-- ... (demais seções que o usuário já possui) -->
 
-  <section id="servicos">
-    <h2>Serviços</h2>
-    <ul>
-      <li><strong>Aluguel de Imóveis:</strong> Residenciais, comerciais e vagas de garagem.</li>
-      <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e centros comerciais.</li>
-      <li><strong>Consultoria Empresarial:</strong> Planejamento, reestruturação e gestão organizacional.</li>
-      <li><strong>Participações Societárias:</strong> Investimentos em empresas com potencial de crescimento.</li>
-    </ul>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <p><strong>Endereço:</strong> Rua Lençóis, São Paulo, SP</p>
-    <p><strong>Telefone:</strong> Em breve</p>
-    <p><strong>E-mail:</strong> contato@cvrgimoveis.com.br</p>
-
-    <!-- Formulário de contato funcional -->
-    <form action="https://formsubmit.co/82a1a0f61fd9b1fbd475fc5f13689392" method="POST">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://www.cvrgimoveis.com.br/obrigado.html">
-
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
-
-      <button type="submit">Enviar Mensagem</button>
-    </form>  
-  </section>
-
-<!-- Container branco para o mapa -->
-<section>
-  <!-- Mapa interativo com botão de acesso externo -->
-  <div id="mapa"></div>
-  <div id="mapa-overlay" style="
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      pointer-events: none;
-      z-index: 999;
-    ">
-      Pressione Shift e role a tela para aplicar zoom no mapa
+  <!-- Container branco para o mapa -->
+  <section>
+    <div id="mapa-wrapper" style="position: relative;">
+      <div id="mapa">
+        <div id="mapa-overlay">
+          Pressione Shift e role a tela para aplicar zoom no mapa
+        </div>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=-23.505029604469076,-46.654660146596875"
+         target="_blank" class="btn-googlemaps">
+        ➤ Ver no Google Maps
+      </a>
     </div>
-    <a href="https://www.google.com/maps/search/?api=1&query=-23.5095,-46.6309"
-       target="_blank" class="btn-googlemaps">
-      ➤ Ver no Google Maps
-    </a>
-  </div>
-</section>
+  </section>
 
-   <!-- Rodapé -->
-  <footer>
-    <p>&copy; 2025 CVRG Participações e Negócios Imobiliários LTDA. Todos os direitos reservados.</p>
-  </footer>
+  <!-- Script JS para inicializar o mapa -->
+  <script>
+    const mapa = L.map('mapa', {
+      center: [-23.505029604469076, -46.654660146596875],
+      zoom: 15,
+      scrollWheelZoom: false
+    });
 
-  <!-- Botões flutuantes -->
-  <a href="https://wa.me/5511956022878?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20CVRG." target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-  </a>
+    // Exibir aviso quando o usuário tentar rolar sem segurar Shift
+    const overlay = document.getElementById('mapa-overlay');
+    let avisoTimeout;
 
-  <button id="btn-topo" title="Voltar ao topo">&#8679;</button>
-  
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  
-  <!-- Adiciona o javascript-->
-  <script src="scripts.js"></script>
-  </body>
+    mapa.getContainer().addEventListener('wheel', function (e) {
+      if (e.shiftKey) {
+        mapa.scrollWheelZoom.enable();
+        clearTimeout(avisoTimeout);
+        avisoTimeout = setTimeout(() => mapa.scrollWheelZoom.disable(), 1000);
+        overlay.style.display = 'none';
+      } else {
+        mapa.scrollWheelZoom.disable();
+        overlay.style.display = 'flex';
+        clearTimeout(avisoTimeout);
+        avisoTimeout = setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 2000);
+      }
+    });
 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(mapa);
+
+    const iconeCVRG = L.icon({
+      iconUrl: 'assets/pin-cvrg.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -35]
+    });
+
+    L.marker([-23.505029604469076, -46.654660146596875], { icon: iconeCVRG }).addTo(mapa)
+      .bindPopup(`
+        <div style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
+          <strong style="font-size: 16px;">CVRG Imóveis</strong><br>
+          Rua Lençóis, São Paulo, SP
+        </div>
+      `)
+      .openPopup();
+  </script>
+</body>
 </html>

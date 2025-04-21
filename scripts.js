@@ -5,7 +5,7 @@ const iconeCVRG = L.icon({
   iconAnchor: [20, 40],           // Ponto de ancoragem
   popupAnchor: [0, -35]           // Onde aparece o popup
 });
- 
+
 const mapa = L.map('mapa', {
   center: [-23.505029604469076, -46.654660146596875],
   zoom: 15,
@@ -23,6 +23,7 @@ mapa.getContainer().addEventListener('wheel', function (e) {
     avisoTimeout = setTimeout(() => mapa.scrollWheelZoom.disable(), 1000);
     overlay.style.display = 'none';
   } else {
+    mapa.scrollWheelZoom.disable();
     overlay.style.display = 'flex';
     clearTimeout(avisoTimeout);
     avisoTimeout = setTimeout(() => {
@@ -33,11 +34,11 @@ mapa.getContainer().addEventListener('wheel', function (e) {
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
-}).addTo(mapa); 
+}).addTo(mapa);
 
 L.marker([-23.505029604469076, -46.654660146596875], { icon: iconeCVRG }).addTo(mapa)
   .bindPopup(`
-    <  style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
+    <div style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
       <strong style="font-size: 16px;">CVRG Imóveis</strong><br>
       Rua Lençóis, São Paulo, SP
     </div>
@@ -76,13 +77,13 @@ toggleDark.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
     toggleDark.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Escuro';
 });*/
+
 // Ao carregar a página, aplica classe pre-visible às seções visíveis
 window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('section').forEach(sec => {
-      const top = sec.getBoundingClientRect().top;
-      if (top < window.innerHeight - 100) {
-        sec.classList.add('pre-visible');
-      }
-    });
+  document.querySelectorAll('section').forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      sec.classList.add('pre-visible');
+    }
   });
-  
+});
