@@ -29,10 +29,18 @@
   </header>
 
   <!-- Navegação -->
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#servicos">Serviços</a>
-    <a href="#contato">Contato</a>
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">CVRG</a>
+    <div class="navbar-toggle" onclick="document.querySelector('.navbar-menu').classList.toggle('active')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="navbar-menu">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </div>
   </nav>
 
   <!-- Seções do conteúdo -->
@@ -75,12 +83,36 @@
     </form>  
   </section>
 
-  <!-- Mapa OpenStreetMap -->
-  <div id="mapa">
-    <a href="https://www.google.com/maps/search/?api=1&query=-23.5095,-46.6309" target="_blank" class="btn-googlemaps">
+<!-- Container branco para o mapa -->
+<section>
+  <!-- Mapa interativo com botão de acesso externo -->
+  <div id="mapa"></div>
+  <div id="mapa-overlay" style="
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+      z-index: 999;
+    ">
+      Pressione Shift e role a tela para aplicar zoom no mapa
+    </div>
+    <a href="https://www.google.com/maps/search/?api=1&query=-23.5095,-46.6309"
+       target="_blank" class="btn-googlemaps">
       ➤ Ver no Google Maps
     </a>
   </div>
+</section>
 
    <!-- Rodapé -->
   <footer>

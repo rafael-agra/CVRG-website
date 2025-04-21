@@ -7,21 +7,30 @@ const iconeCVRG = L.icon({
 });
  
 const mapa = L.map('mapa', {
-  center: [-23.504908,-46.655614],
+  center: [-23.5095,-46.6309],
   zoom: 15,
   scrollWheelZoom: false,
   gestureHandling: true
 });
 
-// Permitir zoom com CTRL + scroll
-mapa.scrollWheelZoom.disable();
+// Exibir aviso quando o usuário tentar rolar sem segurar Shift
+const overlay = document.getElementById('mapa-overlay');
+let avisoTimeout;
+
 mapa.getContainer().addEventListener('wheel', function (e) {
-  if (e.ctrlKey) {
+  if (e.shiftKey) {
     mapa.scrollWheelZoom.enable();
-    setTimeout(() => mapa.scrollWheelZoom.disable(), 1000);
+    clearTimeout(avisoTimeout);
+    avisoTimeout = setTimeout(() => mapa.scrollWheelZoom.disable(), 1000);
+    overlay.style.display = 'none';
+  } else {
+    overlay.style.display = 'flex';
+    clearTimeout(avisoTimeout);
+    avisoTimeout = setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 2000);
   }
 });
-
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
@@ -29,7 +38,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 L.marker([-23.5095, -46.6309], { icon: iconeCVRG }).addTo(mapa)
   .bindPopup(`
-    <div style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
+    <  style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
       <strong style="font-size: 16px;">CVRG Imóveis</strong><br>
       Rua Lençóis, São Paulo, SP
     </div>
