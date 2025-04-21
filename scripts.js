@@ -7,12 +7,19 @@ const iconeCVRG = L.icon({
 });
 
 const mapa = L.map('mapa', {
-  zoomControl: false,
-  scrollWheelZoom: false
-}).setView([-23.505061621515956, -46.65457334259711], 15);
+  center: [-23.505061621515956, -46.65457334259711],
+  zoom: 15,
+  scrollWheelZoom: false,
+  gestureHandling: true
+});
 
-mapa.on('click', () => {
-  mapa.scrollWheelZoom.enable();
+// Permitir zoom com CTRL + scroll
+mapa.scrollWheelZoom.disable();
+mapa.getContainer().addEventListener('wheel', function (e) {
+  if (e.ctrlKey) {
+    mapa.scrollWheelZoom.enable();
+    setTimeout(() => mapa.scrollWheelZoom.disable(), 1000);
+  }
 });
 
 
