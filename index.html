@@ -39,10 +39,47 @@
   </nav>
 
   <!-- Seções do site aqui (sobre, serviços, contato...) -->
-  <!-- ... (demais seções que o usuário já possui) -->
+  <section id="sobre" class="pre-visible">
+    <h2>Sobre Nós</h2>
+    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial...</p>
+  </section>
+
+  <section id="servicos" class="pre-visible">
+    <h2>Serviços</h2>
+    <ul>
+      <li><strong>Aluguel de Imóveis:</strong> Residenciais, comerciais e vagas de garagem.</li>
+      <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e centros comerciais.</li>
+      <li><strong>Consultoria Empresarial:</strong> Planejamento, reestruturação e gestão organizacional.</li>
+      <li><strong>Participações Societárias:</strong> Investimentos em empresas com potencial de crescimento.</li>
+    </ul>
+  </section>
+
+  <section id="contato" class="pre-visible">
+    <h2>Contato</h2>
+    <p><strong>Endereço:</strong> Rua Lençóis, São Paulo, SP</p>
+    <p><strong>Telefone:</strong> Em breve</p>
+    <p><strong>E-mail:</strong> contato@cvrgimoveis.com.br</p>
+
+    <!-- Formulário de contato funcional -->
+    <form action="https://formsubmit.co/82a1a0f61fd9b1fbd475fc5f13689392" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://www.cvrgimoveis.com.br/obrigado.html">
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+
+      <button type="submit">Enviar Mensagem</button>
+    </form>  
+  </section>
 
   <!-- Container branco para o mapa -->
-  <section>
+  <section class="pre-visible">
     <div id="mapa-wrapper" style="position: relative;">
       <div id="mapa">
         <div id="mapa-overlay">
