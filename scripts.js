@@ -1,11 +1,19 @@
-
 // Mapa Leaflet
-var mapa = L.map('mapa').setView([-23.505061621515956, -46.65457334259711], 15);
+const iconeCVRG = L.icon({
+  iconUrl: 'Favicon/favicon-32x32.png', // Caminho do seu ícone
+  iconSize: [40, 40],             // Tamanho do ícone
+  iconAnchor: [20, 40],           // Ponto de ancoragem
+  popupAnchor: [0, -35]           // Onde aparece o popup
+});
+
+const mapa = L.map('mapa').setView([-23.505061621515956, -46.65457334259711], 15);
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(mapa); 
-L.marker([-23.505061621515956, -46.65457334259711]).addTo(mapa)
-  .bindPopup('Rua Lençóis, São Paulo, SP')
+
+L.marker([-23.505061621515956, -46.65457334259711], { icon: iconeCVRG }).addTo(mapa)
+  .bindPopup('<strong>CVRG Imóveis</strong><br>Rua Lençóis, São Paulo, SP')
   .openPopup();
 
 // Rolagem suave
