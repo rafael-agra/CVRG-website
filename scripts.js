@@ -7,10 +7,9 @@ const iconeCVRG = L.icon({
 });
  
 const mapa = L.map('mapa', {
-  center: [-23.5095,-46.6309],
+  center: [-23.505029604469076, -46.654660146596875],
   zoom: 15,
-  scrollWheelZoom: false,
-  gestureHandling: true
+  scrollWheelZoom: false
 });
 
 // Exibir aviso quando o usuário tentar rolar sem segurar Shift
@@ -36,7 +35,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(mapa); 
 
-L.marker([-23.5095, -46.6309], { icon: iconeCVRG }).addTo(mapa)
+L.marker([-23.505029604469076, -46.654660146596875], { icon: iconeCVRG }).addTo(mapa)
   .bindPopup(`
     <  style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
       <strong style="font-size: 16px;">CVRG Imóveis</strong><br>

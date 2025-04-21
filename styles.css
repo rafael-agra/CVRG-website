@@ -192,14 +192,30 @@ form button:hover {
 
  /* Estilo do mapa com sombra e bordas suavizadas */
  #mapa {
+    position: relative; /* ESSENCIAL */
     height: 300px;
     width: 90%;
     max-width: 800px;
-    margin: 40px auto 60px; /* margem inferior aumentada para afastar do rodapé */
+    margin: 40px auto 60px;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    position: relative;
+  }
+
+  #mapa-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+    z-index: 999;
   }
 
   /* Botão “Ver no Google Maps” dentro do mapa */
@@ -216,11 +232,13 @@ form button:hover {
     text-decoration: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background 0.3s;
+    z-index: 1000;
   }
-
+  
   .btn-googlemaps:hover {
     background-color: #0050a0;
   }
+  
 
 @media (max-width: 600px) {
     nav {
