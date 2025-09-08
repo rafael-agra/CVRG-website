@@ -4,18 +4,10 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #f9f9f9;
     color: #333;
-  }
-  
-  /* Cabeçalho com animação */
-  
-  @keyframes fadeInSlideDown {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  header {
+}
+
+/* Cabeçalho */
+header {
   position: relative;
   background-image: url("av-braz-leme.jpg");
   background-size: cover;
@@ -30,309 +22,242 @@ header::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* camada preta translúcida */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
 header h1,
 header p {
   position: relative;
-  z-index: 2; /* garante que o texto fique acima do overlay */
+  z-index: 2;
 }
 
-  
-  /* NAVBAR VISUAL MELHORADA */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background: #003366;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  }
-  
-  .navbar-logo {
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #003366;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.navbar-toggle span {
+  background: white;
+  height: 3px;
+  width: 25px;
+  margin: 4px 0;
+}
+
+/* Responsividade da navbar */
+@media (max-width: 768px) {
   .navbar-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #003366;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    text-align: center;
+    padding-bottom: 12px;
+  }
+
+  .navbar-menu.active {
     display: flex;
-    gap: 20px;
   }
-  
-  .navbar-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-  
-  .navbar-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-  
+
   .navbar-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-  }
-  
-  .navbar-toggle span {
-    background: white;
-    height: 3px;
-    width: 25px;
-    margin: 4px 0;
-  }
-  
-  /* Responsividade da navbar */
-  @media (max-width: 768px) {
-    .navbar-menu {
-      display: none;
-      flex-direction: column;
-      background-color: #003366;
-      width: 100%;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      text-align: center;
-      padding-bottom: 12px;
-    }
-  
-    .navbar-menu.active {
-      display: flex;
-    }
-  
-    .navbar-toggle {
-      display: flex;
-    }
-  }
-  
-  /* Seções principais */
-  section {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 40px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-  }
-  
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  section h2 {
-    color: #003366;
-  }
-  
-  ul {
-    padding-left: 20px;
-  }
-  
-  ul li {
-    margin-bottom: 10px;
-  }
-  
-  /* Rodapé */
-  footer {
-    background-color: #003366;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 0.9em;
-  }
-  
-  /* Botão flutuante WhatsApp */
-  .whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    color: white;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    z-index: 1000;
   }
-  
-  .whatsapp-float img {
-    width: 30px;
-    height: 30px;
-  }
-  
-  /* Botão Voltar ao Topo */
-  #btn-topo {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    background-color: #003366;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 999;
-    font-size: 1.5em;
-  }
-  
-  /* Formulário de Contato */
-  form {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  form input,
-  form textarea {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    max-width: 500px;
-  }
-  
-  form button {
-    background-color: #003366;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 6px;
-    cursor: pointer;
-    width: fit-content;
-  }
-  
-  form button:hover {
-    background-color: #0050a0;
-  }
-  
-  /* Estilo do mapa com sombra e bordas suavizadas */
-  #mapa {
-    position: relative;
-    height: 300px;
-    width: 90%;
-    max-width: 800px;
-    margin: 40px auto 60px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-  }
-  
-  #mapa-overlay {
-    display: none;
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    pointer-events: none;
-    z-index: 999;
-  }
-  
-  .btn-googlemaps {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background-color: #003366;
-    color: #fff;
-    padding: 8px 14px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 6px;
-    text-decoration: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-    z-index: 1000;
-  }
-  
-  .btn-googlemaps:hover {
-    background-color: #0050a0;
-  }
-  
-  /* Ajustes adicionais */
-  section.pre-visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-  
+}
+
+/* Seções */
+section {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 1;          /* SEM animação → sempre visível */
+  transform: none;     /* SEM deslocamento */
+}
+
+section h2 {
+  color: #003366;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+/* Rodapé */
+footer {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9em;
+}
+
+/* Botão flutuante WhatsApp */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.whatsapp-float img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Botão Voltar ao Topo */
+#btn-topo {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  font-size: 1.5em;
+}
+
+/* Formulário */
+form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+form input,
+form textarea {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  max-width: 500px;
+}
+
+form button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+form button:hover {
+  background-color: #0050a0;
+}
+
+/* Mapa */
+#mapa {
+  position: relative;
+  height: 300px;
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto 60px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Overlay do mapa: escondido por padrão */
+#mapa-overlay {
+  display: none;                  /* fica OFF por padrão */
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  align-items: center;            /* (só prepara o flex) */
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  z-index: 999;                   /* abaixo do botão */
+}
+
+/* Quando quiser mostrar via JS, adicione a classe .show no overlay */
+#mapa-overlay.show {
+  display: flex;
+}
 
 
-  /* DARK MODE 
-body.dark-mode {
-background-color: #121212;
-color: #e0e0e0;
+.btn-googlemaps {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #003366;
+  color: #ffffff !important;   /* força o texto a ser branco */
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+  z-index: 1001;
 }
-body.dark-mode section {
-background-color: #1e1e1e;
-color: #e0e0e0;
-}
-body.dark-mode header {
-background-color: #1e1e1e;
-background-blend-mode: multiply;
-}
-body.dark-mode nav {
-background-color: #222;
-}
-body.dark-mode nav a {
-color: #e0e0e0;
-}
-body.dark-mode footer {
-background-color: #1e1e1e;
-color: #aaa;
-}
-body.dark-mode #btn-topo {
-background-color: #444;
-}
-*/
 
-/* Botão de dark mode 
-#toggle-dark {
-position: fixed;
-top: 20px;
-left: 20px;
-background: #003366;
-color: #fff;
-border: none;
-padding: 10px 16px;
-border-radius: 8px;
-cursor: pointer;
-z-index: 1001;
-font-weight: bold;
-}
-  Dark mode para navbar 
- body.dark-mode nav {
-    background-color: #111;
-  }
 
-  body.dark-mode nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-*/
+.btn-googlemaps:hover {
+  background-color: #3c9dff;
+}

@@ -13,7 +13,6 @@
 
   <!-- Estilos CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <!-- Chama o arquivo styles.css-->  
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -38,29 +37,36 @@
     </div>
   </nav>
 
-  <!-- Seções do site aqui (sobre, serviços, contato...) -->
-  <section id="sobre" class="pre-visible">
+  <!-- Seções -->
+  <section id="sobre">
     <h2>Sobre Nós</h2>
-    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial...</p>
+    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial.
+
+      <br/><br/>
+      Fundada em 2019 com o propósito de transformar oportunidades em negócios sólidos no setor imobiliário e de participações estratégicas. Atuamos com foco em empreendimentos residenciais e comerciais 
+      de pequeno e médio porte, sempre conectados às demandas do mercado e às tendências de inovação e sustentabilidade.
+
+      <br/><br/>
+      Na CVRG, acreditamos que o futuro do Real Estate está na integração entre tecnologia, sustentabilidade e inteligência de mercado. Estamos preparados para crescer junto com nossos parceiros e transformar cada projeto em um legado.
+    </p>
   </section>
 
-  <section id="servicos" class="pre-visible">
+  <section id="servicos">
     <h2>Serviços</h2>
     <ul>
       <li><strong>Aluguel de Imóveis:</strong> Residenciais, comerciais e vagas de garagem.</li>
-      <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e centros comerciais.</li>
+      <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e imóveis.</li>
       <li><strong>Consultoria Empresarial:</strong> Planejamento, reestruturação e gestão organizacional.</li>
-      <li><strong>Participações Societárias:</strong> Investimentos em empresas com potencial de crescimento.</li>
     </ul>
   </section>
 
-  <section id="contato" class="pre-visible">
+  <section id="contato">
     <h2>Contato</h2>
     <p><strong>Endereço:</strong> Rua Lençóis, São Paulo, SP</p>
     <p><strong>Telefone:</strong> Em breve</p>
     <p><strong>E-mail:</strong> contato@cvrgimoveis.com.br</p>
 
-    <!-- Formulário de contato funcional -->
+    <!-- Formulário de contato -->
     <form action="https://formsubmit.co/82a1a0f61fd9b1fbd475fc5f13689392" method="POST">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://www.cvrgimoveis.com.br/obrigado.html">
@@ -78,23 +84,21 @@
     </form>  
   </section>
 
-  <!-- Container branco para o mapa -->
-  <section class="pre-visible">
-    <div id="mapa-wrapper" style="position: relative;">
+  <!-- Mapa -->
+  <section>
+    <div id="mapa-wrapper">
       <div id="mapa">
-        <div id="mapa-overlay">
-          Pressione Shift e role a tela para aplicar zoom no mapa
-        </div>
-      </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=-23.505029604469076,-46.654660146596875"
-         target="_blank" class="btn-googlemaps">
-        ➤ Ver no Google Maps
-      </a>
+          <div id="mapa-overlay">Pressione Shift e role a tela para aplicar zoom no mapa</div>
+
+              <a href="https://www.google.com/maps/search/?api=1&query=-23.505029604469076,-46.654660146596875"
+                target="_blank" class="btn-googlemaps">
+              ➤ Ver no Google Maps
+              </a>
+          </div>
     </div>
   </section>
 
-  
-  <!-- Scripts externos -->
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="scripts.js"></script>
 </body>
