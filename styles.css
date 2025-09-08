@@ -4,52 +4,69 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #f9f9f9;
     color: #333;
-}
-
-/* Cabeçalho com animação */
-header {
-    background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');
-    background-size: cover;
-    background-position: center;
-    padding: 60px 20px;
-    text-align: center;
-    color: white;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInSlideDown 1s ease forwards;
-}
-
-@keyframes fadeInSlideDown {
+  }
+  
+  /* Cabeçalho com animação */
+  
+  @keyframes fadeInSlideDown {
     to {
-    opacity: 1;
-    transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
+  
+  header {
+  position: relative;
+  background-image: url("av-braz-leme.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
 }
 
-header h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* camada preta translúcida */
+  z-index: 1;
 }
 
+header h1,
 header p {
-    font-size: 1.2em;
+  position: relative;
+  z-index: 2; /* garante que o texto fique acima do overlay */
 }
 
-/* NAVBAR VISUAL MELHORADA */
-nav {
+  
+  /* NAVBAR VISUAL MELHORADA */
+  .navbar {
     position: sticky;
     top: 0;
     z-index: 999;
     background: #003366;
     display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 16px 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s ease;
   }
-
-  nav a {
+  
+  .navbar-logo {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar-menu a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
@@ -58,15 +75,49 @@ nav {
     border-radius: 6px;
     transition: background 0.3s ease, color 0.3s ease;
   }
-
-  nav a:hover {
+  
+  .navbar-menu a:hover {
     background-color: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
   }
-
-
-/* Seções principais */
-section {
+  
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .navbar-toggle span {
+    background: white;
+    height: 3px;
+    width: 25px;
+    margin: 4px 0;
+  }
+  
+  /* Responsividade da navbar */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #003366;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      text-align: center;
+      padding-bottom: 12px;
+    }
+  
+    .navbar-menu.active {
+      display: flex;
+    }
+  
+    .navbar-toggle {
+      display: flex;
+    }
+  }
+  
+  /* Seções principais */
+  section {
     max-width: 1000px;
     margin: 40px auto;
     padding: 40px;
@@ -76,48 +127,36 @@ section {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s ease;
-}
-
-section.visible {
+  }
+  
+  section.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-section h2 {
+  }
+  
+  section h2 {
     color: #003366;
-}
-
-ul {
+  }
+  
+  ul {
     padding-left: 20px;
-}
-
-ul li {
+  }
+  
+  ul li {
     margin-bottom: 10px;
-}
-
-/* Rodapé */
-footer {
+  }
+  
+  /* Rodapé */
+  footer {
     background-color: #003366;
     color: white;
     text-align: center;
     padding: 20px 0;
     font-size: 0.9em;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    header h1 {
-    font-size: 2em;
-    }
-
-    section {
-    margin: 20px;
-    padding: 20px;
-    }
-}
-
-/* Botão flutuante WhatsApp */
-.whatsapp-float {
+  }
+  
+  /* Botão flutuante WhatsApp */
+  .whatsapp-float {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -132,15 +171,15 @@ footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     z-index: 1000;
-}
-
-.whatsapp-float img {
+  }
+  
+  .whatsapp-float img {
     width: 30px;
     height: 30px;
-}
-
-/* Botão Voltar ao Topo */
-#btn-topo {
+  }
+  
+  /* Botão Voltar ao Topo */
+  #btn-topo {
     position: fixed;
     bottom: 90px;
     right: 20px;
@@ -156,26 +195,26 @@ footer {
     cursor: pointer;
     z-index: 999;
     font-size: 1.5em;
-}
-
-/* Formulário de Contato */
-form {
+  }
+  
+  /* Formulário de Contato */
+  form {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-}
-
-form input,
-form textarea {
+  }
+  
+  form input,
+  form textarea {
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 6px;
     margin-bottom: 15px;
     max-width: 500px;
-}
-
-form button {
+  }
+  
+  form button {
     background-color: #003366;
     color: white;
     border: none;
@@ -184,15 +223,15 @@ form button {
     border-radius: 6px;
     cursor: pointer;
     width: fit-content;
-}
-
-form button:hover {
+  }
+  
+  form button:hover {
     background-color: #0050a0;
-}
-
- /* Estilo do mapa com sombra e bordas suavizadas */
- #mapa {
-    position: relative; /* ESSENCIAL */
+  }
+  
+  /* Estilo do mapa com sombra e bordas suavizadas */
+  #mapa {
+    position: relative;
     height: 300px;
     width: 90%;
     max-width: 800px;
@@ -201,7 +240,7 @@ form button:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     overflow: hidden;
   }
-
+  
   #mapa-overlay {
     display: none;
     position: absolute;
@@ -217,8 +256,7 @@ form button:hover {
     pointer-events: none;
     z-index: 999;
   }
-
-  /* Botão “Ver no Google Maps” dentro do mapa */
+  
   .btn-googlemaps {
     position: absolute;
     bottom: 12px;
@@ -239,22 +277,15 @@ form button:hover {
     background-color: #0050a0;
   }
   
-
-@media (max-width: 600px) {
-    nav {
-      flex-direction: column;
-      gap: 10px;
-      padding: 12px;
-    }
-  
-    nav a {
-      font-size: 0.95rem;
-      padding: 6px 12px;
-    }
-}
+  /* Ajustes adicionais */
+  section.pre-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
   
 
-/* DARK MODE 
+
+  /* DARK MODE 
 body.dark-mode {
 background-color: #121212;
 color: #e0e0e0;
@@ -305,9 +336,3 @@ font-weight: bold;
     background-color: rgba(255, 255, 255, 0.2);
   }
 */
-/* Ajusta a visibilidade inicial das seções visíveis na tela ao carregar */
-section.pre-visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-  
