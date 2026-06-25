@@ -8,98 +8,282 @@
 
   <link rel="icon" href="Favicon/favicon.ico" type="image/x-icon">
 
-  <!-- Fonte personalizada -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Estilos CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --primary: #003366;
+      --secondary: #3b82f6;
+      --text-main: #334155;
+      --text-light: #64748b;
+      --bg-light: #f9f9f9;
+      --bg-white: #ffffff;
+      --border-radius: 8px;
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--bg-light); line-height: 1.6; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* CABEÇALHO COM A IMAGEM AV-BRAZ-LEME */
+    header {
+      position: relative;
+      background-image: url('av-braz-leme.jpg'); /* SUA IMAGEM AQUI */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 120px 24px;
+      text-align: center;
+      color: white;
+    }
+
+    /* Película escura por cima da imagem para o texto branco aparecer bem */
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 51, 102, 0.6); 
+      z-index: 1;
+    }
+
+    header .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px; }
+    header p { font-size: 1.125rem; color: #f1f5f9; max-width: 600px; margin: 0 auto; }
+
+    /* NAVBAR */
+    .navbar { background-color: var(--primary); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); position: sticky; top: 0; z-index: 1000; }
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; }
+    .brand-logo { font-weight: 700; color: var(--bg-white); text-decoration: none; font-size: 1.2rem; }
+    .navbar-menu { display: flex; gap: 20px; }
+    .navbar-menu a { color: var(--bg-white); text-decoration: none; font-weight: 600; font-size: 1rem; padding: 8px 16px; border-radius: 6px; transition: var(--transition); }
+    .navbar-menu a:hover { background-color: rgba(255, 255, 255, 0.15); }
+    .navbar-toggle { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+    .navbar-toggle span { width: 25px; height: 3px; background-color: var(--bg-white); border-radius: 2px; }
+
+    /* SEÇÕES E CARDS (VISUAL NOVA VERSÃO) */
+    section { padding: 80px 0; }
+    .section-title { font-size: 2rem; color: var(--primary); margin-bottom: 24px; text-align: center; }
+    .section-subtitle { text-align: center; max-width: 700px; margin: 0 auto 48px auto; color: var(--text-light); }
+    .sobre-content { font-size: 1.05rem; background-color: var(--bg-white); padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+    
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .service-card { background: var(--bg-white); padding: 32px; border-radius: var(--border-radius); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; transition: var(--transition); }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); border-color: var(--secondary); }
+    .service-card h3 { color: var(--primary); margin-bottom: 12px; font-size: 1.25rem; }
+
+    /* CONTATO E MAPA */
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; background-color: var(--bg-white); padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+    .contact-info p { margin-bottom: 16px; display: flex; flex-direction: column; }
+    .contact-info strong { color: var(--primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form label { font-weight: 500; color: var(--primary); font-size: 0.95rem; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 12px 16px; border: 1px solid #ccc; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 1rem; transition: var(--transition); }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+    .btn-submit { background-color: var(--primary); color: var(--bg-white); padding: 12px 20px; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition); width: fit-content; margin-top: 8px; }
+    .btn-submit:hover { background-color: #0050a0; }
+
+    /* MAPA LEAFLET E GOOGLE MAPS */
+    #mapa-wrapper { position: relative; height: 300px; width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); overflow: hidden; margin-top: 24px; }
+    #mapa { height: 100%; width: 100%; z-index: 1; }
+    #mapa-overlay { display: none; position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); color: white; font-size: 16px; font-weight: bold; align-items: center; justify-content: center; text-align: center; pointer-events: none; z-index: 999; }
+    .btn-googlemaps { display: inline-block; margin-top: 16px; color: var(--secondary); text-decoration: none; font-weight: 600; }
+    .btn-googlemaps:hover { text-decoration: underline; }
+
+    footer { background-color: var(--primary); color: white; text-align: center; padding: 24px 0; font-size: 0.9em; }
+
+    /* BOTÃO WHATSAPP E TOPO */
+    .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); text-decoration: none; z-index: 1000; transition: transform 0.2s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float img { width: 35px; height: 35px; }
+
+    #btn-topo { position: fixed; bottom: 90px; right: 20px; background-color: var(--primary); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 999; font-size: 1.5em; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+    #btn-topo:hover { background-color: #0050a0; }
+
+    @media (max-width: 768px) {
+      .navbar-toggle { display: flex; }
+      .navbar-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.15); }
+      .navbar-menu.active { display: flex; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      header h1 { font-size: 2rem; }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Cabeçalho -->
-  <header>
-    <h1>CVRG Participações e Negócios Imobiliários LTDA</h1>
-    <p>Excelência em gestão imobiliária, participações empresariais e consultoria estratégica</p>
-  </header>
 
-  <!-- Navegação responsiva -->
   <nav class="navbar">
-    <div class="navbar-toggle" onclick="document.querySelector('.navbar-menu').classList.toggle('active')">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="navbar-menu">
-      <a href="#sobre">Sobre</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#contato">Contato</a>
+    <div class="container">
+      <a href="#" class="brand-logo">CVRG</a>
+      <div class="navbar-toggle" onclick="document.querySelector('.navbar-menu').classList.toggle('active')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="navbar-menu">
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Seções -->
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>A CVRG Participações e Negócios Imobiliários LTDA, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial.
-
-      <br/><br/>
-      Fundada em 2019 com o propósito de transformar oportunidades em negócios sólidos no setor imobiliário e de participações estratégicas. Atuamos com foco em empreendimentos residenciais e comerciais 
-      de pequeno e médio porte, sempre conectados às demandas do mercado e às tendências de inovação e sustentabilidade.
-
-      <br/><br/>
-      Na CVRG, acreditamos que o futuro do Real Estate está na integração entre tecnologia, sustentabilidade e inteligência de mercado. Estamos preparados para crescer junto com nossos parceiros e transformar cada projeto em um legado.
-    </p>
-  </section>
-
-  <section id="servicos">
-    <h2>Serviços</h2>
-    <ul>
-      <li><strong>Aluguel de Imóveis:</strong> Residenciais, comerciais e vagas de garagem.</li>
-      <li><strong>Administração Imobiliária:</strong> Gerenciamento de condomínios e imóveis.</li>
-      <li><strong>Consultoria Empresarial:</strong> Planejamento, reestruturação e gestão organizacional.</li>
-    </ul>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <p><strong>Endereço:</strong> Rua Lençóis, São Paulo, SP</p>
-    <p><strong>Telefone:</strong> Em breve</p>
-    <p><strong>E-mail:</strong> contato@cvrgimoveis.com.br</p>
-
-    <!-- Formulário de contato -->
-    <form action="https://formsubmit.co/82a1a0f61fd9b1fbd475fc5f13689392" method="POST">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://www.cvrgimoveis.com.br/obrigado.html">
-
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
-
-      <button type="submit">Enviar Mensagem</button>
-    </form>  
-  </section>
-
-  <!-- Mapa -->
-  <section>
-    <div id="mapa-wrapper">
-      <div id="mapa">
-          <div id="mapa-overlay">Pressione Shift e role a tela para aplicar zoom no mapa</div>
-
-              <a href="https://www.google.com/maps/search/?api=1&query=-23.505029604469076,-46.654660146596875"
-                target="_blank" class="btn-googlemaps">
-              ➤ Ver no Google Maps
-              </a>
-          </div>
+  <header>
+    <div class="container">
+      <h1>CVRG Participações e Negócios Imobiliários</h1>
+      <p>Excelência em gestão imobiliária, participações empresariais e consultoria estratégica</p>
     </div>
-  </section>
+  </header>
 
-  <!-- Scripts -->
+  <main>
+    <section id="sobre">
+      <div class="container">
+        <h2 class="section-title">Sobre Nós</h2>
+        <div class="sobre-content">
+          <p>A <strong>CVRG Participações e Negócios Imobiliários LTDA</strong>, com sede em São Paulo, é especializada em gestão de ativos imobiliários e consultoria empresarial.</p>
+          <br/>
+          <p>Fundada em 2019 com o propósito de transformar oportunidades em negócios sólidos no setor imobiliário e de participações estratégicas. Atuamos com foco em empreendimentos residenciais e comerciais de pequeno e médio porte, sempre conectados às demandas do mercado e às tendências de inovação e sustentabilidade.</p>
+          <br/>
+          <p>Na CVRG, acreditamos que o futuro do Real Estate está na integração entre tecnologia, sustentabilidade e inteligência de mercado. Estamos preparados para crescer junto com nossos parceiros e transformar cada projeto em um legado.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <h2 class="section-title">Nossos Serviços</h2>
+        <p class="section-subtitle">Soluções completas e integradas para o mercado imobiliário e empresarial.</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <h3>Aluguel de Imóveis</h3>
+            <p>Locação estratégica de imóveis residenciais, comerciais e vagas de garagem, garantindo segurança e rentabilidade.</p>
+          </div>
+          <div class="service-card">
+            <h3>Administração Imobiliária</h3>
+            <p>Gerenciamento completo e eficiente de condomínios e imóveis, com foco em manutenção preventiva e financeira.</p>
+          </div>
+          <div class="service-card">
+            <h3>Consultoria Empresarial</h3>
+            <p>Planejamento de alto nível, reestruturação e gestão organizacional para maximizar os resultados do seu negócio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <h2 class="section-title">Fale Conosco</h2>
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <p><strong>Endereço</strong> Rua Lençóis, São Paulo, SP</p>
+            <p><strong>Telefone</strong> Em breve</p>
+            <p><strong>E-mail</strong> contato@cvrgimoveis.com.br</p>
+
+            <div id="mapa-wrapper">
+              <div id="mapa-overlay">Pressione Shift e role a tela para dar zoom</div>
+              <div id="mapa"></div>
+            </div>
+            
+            <a href="https://www.google.com/maps/search/?api=1&query=-23.505029604469076,-46.654660146596875" target="_blank" class="btn-googlemaps">➤ Ver rotas no Google Maps</a>
+          </div>
+
+          <div class="contact-form-container">
+            <form class="contact-form" action="https://formsubmit.co/82a1a0f61fd9b1fbd475fc5f13689392" method="POST">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://www.cvrgimoveis.com.br/obrigado.html">
+              <div><label for="nome">Nome Completo</label><input type="text" id="nome" name="nome" placeholder="Digite seu nome" required></div>
+              <div><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required></div>
+              <div><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" rows="6" placeholder="Como podemos ajudar?" required></textarea></div>
+              <button type="submit" class="btn-submit">Enviar Mensagem</button>
+            </form>  
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 CVRG Participações e Negócios Imobiliários LTDA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank" title="Fale conosco no WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+  <button id="btn-topo" title="Voltar ao Topo">↑</button>
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="scripts.js"></script>
+  <script>
+    const iconeCVRG = L.icon({
+      iconUrl: 'Favicon/favicon-32x32.png', 
+      iconSize: [40, 40],             
+      iconAnchor: [20, 40],           
+      popupAnchor: [0, -35]           
+    });
+
+    const mapa = L.map('mapa', {
+      center: [-23.505029604469076, -46.654660146596875],
+      zoom: 15,
+      scrollWheelZoom: false
+    });
+
+    const overlay = document.getElementById('mapa-overlay');
+    let avisoTimeout;
+
+    mapa.getContainer().addEventListener('wheel', function (e) {
+      if (e.shiftKey) {
+        mapa.scrollWheelZoom.enable();
+        clearTimeout(avisoTimeout);
+        avisoTimeout = setTimeout(() => mapa.scrollWheelZoom.disable(), 1000);
+        overlay.style.display = 'none';
+      } else {
+        mapa.scrollWheelZoom.disable();
+        overlay.style.display = 'flex';
+        clearTimeout(avisoTimeout);
+        avisoTimeout = setTimeout(() => { overlay.style.display = 'none'; }, 2000);
+      }
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(mapa);
+
+    L.marker([-23.505029604469076, -46.654660146596875], { icon: iconeCVRG }).addTo(mapa)
+      .bindPopup(`
+        <div style="font-family: Inter, sans-serif; font-size: 14px; line-height: 1.4;">
+          <strong style="font-size: 16px;">CVRG Imóveis</strong><br>
+          Rua Lençóis, São Paulo, SP
+        </div>
+      `).openPopup();
+
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const section = document.querySelector(this.getAttribute('href'));
+        section.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    const btnTopo = document.getElementById('btn-topo');
+    window.addEventListener('scroll', () => {
+      btnTopo.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+
+    btnTopo.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
